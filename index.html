@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKB • Akun Kita Bersama | Kontribusi Solidaritas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #c62828, #b71c1c);
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(0,0,0,0.03),
+                    rgba(0,0,0,0.03) 10px,
+                    transparent 10px,
+                    transparent 20px
+                ),
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 20%);
+            z-index: -1;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .motto {
+            font-style: italic;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: #FFD700;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #FFD700;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #FFD700;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .payment-card {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .payment-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #FFD700, #c62828);
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .payment-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .gopay .payment-icon { color: #00AEEF; }
+        .dana .payment-icon { color: #008DD2; }
+        .ovo .payment-icon { color: #FF6600; }
+        
+        .payment-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .payment-number {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            letter-spacing: 2px;
+            word-spacing: 10px;
+        }
+        
+        .copy-btn {
+            background: #FFD700;
+            color: #1a1a1a;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-btn:hover {
+            background: #FFC107;
+            transform: scale(1.05);
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid #FFD700;
+        }
+        
+        .instructions h3 {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+        
+        .steps {
+            list-style: none;
+        }
+        
+        .steps li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+        
+        .steps li:last-child {
+            border-bottom: none;
+        }
+        
+        .steps li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background: #FFD700;
+            color: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .solidarity-note {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .banners {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .banner {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .banner h4 {
+            font-size: 1.1rem;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2.5rem 1.5rem 3rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+            color: #e0e0e0;
+        }
+        
+        .creator {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.2rem 2rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #FFD700;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .logo { font-size: 2.2rem; }
+            .subtitle { font-size: 1rem; }
+            .payment-methods { grid-template-columns: 1fr; }
+            .banners { flex-direction: column; align-items: center; }
+        }
+        
+        @media (max-width: 480px) {
+            .header { padding: 1.5rem 1rem; }
+            .logo { font-size: 1.8rem; }
+            .payment-number { font-size: 1.1rem; word-spacing: 5px; }
+            .section-title { font-size: 1.7rem; }
+        }
+        
+        /* Animation for copy success */
+        @keyframes flash {
+            0%, 100% { background: #FFD700; }
+            50% { background: #FFC107; }
+        }
+        
+        .flash {
+            animation: flash 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="logo">AKB</h1>
+        <p class="subtitle">AKUN KITA BERSAMA • Kontribusi Solidaritas untuk Kesejahteraan Bersama</p>
+        <p class="motto">"Dari Rakyat, Oleh Rakyat, Untuk Rakyat"</p>
+    </div>
+    
+    <div class="container">
+        <h2 class="section-title">Metode Pembayaran Solidaritas</h2>
+        
+        <div class="payment-methods">
+            <div class="payment-card gopay">
+                <div class="payment-icon">
+                    <i class="fab fa-google"></i>
+                </div>
+                <h3 class="payment-name">GOPAY</h3>
+                <div class="payment-number" id="gopay-number">+62 882-0201-94288</div>
+                <button class="copy-btn" onclick="copyToClipboard('gopay-number')">
+                    <i class="fas fa-copy"></i> Salin Nomor
+                </button>
+            </div>
+            
+            <div class="payment-card dana">
+                <div class="payment-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="payment-name">DANA</h3>
+                <div class="payment-number" id="dana-number">+62 882-0201-94288</div>
+                <button class="copy-btn" onclick="copyToClipboard('dana-number')">
+                    <i class="fas fa-copy"></i> Salin Nomor
+                </button>
+            </div>
+            
+            <div class="payment-card ovo">
+                <div class="payment-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h3 class="payment-name">OVO</h3>
+                <div class="payment-number" id="ovo-number">+62 882-0201-94288</div>
+                <button class="copy-btn" onclick="copyToClipboard('ovo-number')">
+                    <i class="fas fa-copy"></i> Salin Nomor
+                </button>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>Petunjuk Kontribusi Solidaritas</h3>
+            <ul class="steps">
+                <li>Buka aplikasi e-wallet (GOPAY, DANA, atau OVO)</li>
+                <li>Pilih menu "Kirim ke Nomor HP" atau "Transfer ke Nomor Telepon"</li>
+                <li>Masukkan nomor bendahara: <strong>+62 882-0201-94288</strong></li>
+                <li>Masukkan nominal kontribusi sesuai kesepakatan kelompok</li>
+                <li>Tambahkan keterangan: <strong>"AKB - [Nama Anda]"</strong></li>
+                <li>Konfirmasi dan simpan bukti transfer</li>
+                <li>Laporkan ke bendahara untuk verifikasi</li>
+            </ul>
+        </div>
+        
+        <div class="solidarity-note">
+            Setiap kontribusi yang Anda berikan adalah bentuk solidaritas kolektif yang memperkuat fondasi AKB. 
+            Dana yang terkumpul akan digunakan untuk kepentingan bersama sesuai kesepakatan demokratis anggota.
+        </div>
+        
+        <div class="banners">
+            <div class="banner">
+                <h4><i class="fas fa-hand-holding-heart"></i> Solidaritas</h4>
+                <p>Bersatu dalam semangat gotong royong</p>
+            </div>
+            <div class="banner">
+                <h4><i class="fas fa-balance-scale"></i> Transparansi</h4>
+                <p>Laporan keuangan dibuka untuk semua anggota</p>
+            </div>
+            <div class="banner">
+                <h4><i class="fas fa-users"></i> Kolektivitas</h4>
+                <p>Keputusan diambil secara musyawarah</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Terima kasih atas kontribusi solidaritas Anda untuk kemajuan bersama</p>
+        <p>Semoga semangat persatuan dan keadilan sosial terus menyala dalam hati kita</p>
+        
+        <div class="creator">
+            Website ini dibuat oleh Bendahara AKB - Atha Ullah Syaiban
+        </div>
+    </footer>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            const textElement = document.getElementById(elementId);
+            const text = textElement.textContent.replace(/\s+/g, '');
+            
+            // Create temporary textarea for copying
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            // Visual feedback
+            const button = event.target;
+            button.classList.add('flash');
+            button.innerHTML = '<i class="fas fa-check"></i> Disalin!';
+            
+            setTimeout(() => {
+                button.classList.remove('flash');
+                button.innerHTML = '<i class="fas fa-copy"></i> Salin Nomor';
+            }, 1500);
+        }
+        
+        // Add subtle animation to payment cards on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.payment-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
+
